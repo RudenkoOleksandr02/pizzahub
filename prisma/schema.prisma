@@ -1,0 +1,33 @@
+// генерация клиента для js
+generator client {
+  provider = "prisma-client-js"
+}
+
+// с какой базой данных работать
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  // id - число, c уникальным идентификатором, с автоматическим добавлением id на +1
+  id Int @id @default(autoincrement())
+
+  fullName String
+  // имейл уникальный
+  email    String @unique
+  password String
+
+  // когда пользователь был создан
+  createdAt DateTime @default(now())
+  // когда пользователь был обновлен
+  updatedAt DateTime @updatedAt
+}
+
+model Product {
+  id        Int      @id @default(autoincrement())
+  name      String
+  imageUrl  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

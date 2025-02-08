@@ -77,7 +77,7 @@ export default function Home() {
                                 items: [{price: 550}]
                             },
                         ]} categoryId={1}/>
-                        <ProductsGroupList title="Завтрак" items={[
+                        <ProductsGroupList title="Комбо" items={[
                             {
                                 id: 1,
                                 name: 'Маргарита',
@@ -134,7 +134,7 @@ export default function Home() {
                                 price: 550,
                                 items: [{price: 550}]
                             },
-                        ]} categoryId={1}/>
+                        ]} categoryId={2}/>
                     </div>
                 </div>
             </div>
