@@ -2,7 +2,7 @@
 
 import React from 'react';
 import {FilterCheckbox} from "./index";
-import {Input} from '../ui';
+import {Input, Skeleton} from '../ui';
 import {FilterCheckboxProps} from "@/components/shared/filter-checkbox";
 
 type Item = FilterCheckboxProps;
@@ -10,11 +10,14 @@ type Item = FilterCheckboxProps;
 interface Props {
     title: string;
     items: Item[];
-    defaultItems: Item[];
+    defaultItems?: Item[];
     limit?: number;
     searchInputPlaceholder?: string;
-    onChange?: (value: string[]) => void;
+    onClickCheckbox: (id: string) => void;
     defaultValue?: string[];
+    loading?: boolean;
+    selected: Set<string>;
+    name?: string;
     className?: string;
 }
 
@@ -25,7 +28,10 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
                                                           items,
                                                           title,
                                                           searchInputPlaceholder = "Поиск...",
-                                                          onChange,
+                                                          onClickCheckbox,
+                                                          selected,
+                                                          loading,
+                                                          name,
                                                           limit = 5
                                                       }) => {
     const [showAll, setShowAll] = React.useState<boolean>(false);
@@ -35,24 +41,40 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
         setSearchValue(e.target.value);
     }
 
-    const list = showAll ? items.filter(item => item.text.toLowerCase().includes(searchValue.toLowerCase())) : defaultItems.slice(0, limit);
+    const list = showAll
+        ? items.filter(item => item.text.toLowerCase().includes(searchValue.toLowerCase()))
+        : (defaultItems?.slice(0, limit) || items);
+
+    if (loading) {
+        return <div className={className}>
+            <p className="font-bold mb-3">{title}</p>
+
+            {Array.from({length: limit}).map((_, index) => (
+                <Skeleton key={index} className="h-6 mb-4 rounded-[8px]"/>
+            ))}
+
+            <Skeleton className={'w-[50%] h-6 mb-4 rounded-[8px]'}/>
+        </div>
+    }
 
     return (
         <div className={className}>
             <p className="font-bold mb-3">{title}</p>
 
             {showAll && <div className="mb-5">
-                <Input onChange={onChangeSearchInput} value={searchValue} placeholder={searchInputPlaceholder} className="bg-gray-50 border-none"/>
+                <Input onChange={onChangeSearchInput} value={searchValue} placeholder={searchInputPlaceholder}
+                       className="bg-gray-50 border-none"/>
             </div>}
 
             <div className="flex flex-col gap-4 max-h-96 pr-2 overflow-auto scrollbar">
                 {list.map((item, index) => (
                     <FilterCheckbox
                         key={index}
+                        name={name}
                         text={item.text}
                         value={item.value}
-                        checked={false}
-                        onCheckedChange={(ids) => console.log(ids)}
+                        checked={selected.has(item.value)}
+                        onCheckedChange={() => onClickCheckbox(item.value)}
                         endAdornment={item.endAdornment}
                     />))}
             </div>

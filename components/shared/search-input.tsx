@@ -23,9 +23,14 @@ export const SearchInput: React.FC<Props> = ({className}) => {
         setFocused(false);
     });
 
-    // каждые 200 милисек проверяет изменения
-    useDebounce(() => {
-        Api.products.search(searchQuery).then(items => setProducts(items));
+    // каждые 200 милисек проверяет изменения searchQuery
+    useDebounce(async () => {
+        try {
+            const products = await Api.products.search(searchQuery);
+            setProducts(products)
+        } catch (error) {
+            console.error(error)
+        }
     }, 250, [searchQuery])
 
     const onClickItem = () => {
