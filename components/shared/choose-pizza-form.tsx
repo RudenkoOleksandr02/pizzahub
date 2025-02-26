@@ -10,19 +10,22 @@ import {usePizzaOptions} from "@/hooks/use-pizza-options";
 interface Props {
     imageUrl: string;
     name: string;
+    onSubmit: (itemId: number, ingredientsIds: number[]) => void;
     ingredients: Ingredient[];
     items: ProductItem[];
-    onClickAddCart?: VoidFunction;
     className?: string;
 }
 
+/**
+ * Форма выбора ПИЦЦЫ
+ */
 export const ChoosePizzaForm: React.FC<Props> = ({
                                                      imageUrl,
                                                      name,
                                                      ingredients,
                                                      items,
-                                                     onClickAddCart,
-                                                     className
+                                                     className,
+                                                     onSubmit
                                                  }) => {
     const {
         size,
@@ -31,13 +34,14 @@ export const ChoosePizzaForm: React.FC<Props> = ({
         setType,
         selectedIngredients,
         toggleIngredient,
-        availableSizes
+        availableSizes,
+        currentItemId
     } = usePizzaOptions(items);
 
     const {totalPrice, textDetails} = getPizzaDetails(type, size, items, ingredients, selectedIngredients);
 
     const handleClickAdd = () => {
-        onClickAddCart?.();
+        if (currentItemId) onSubmit(currentItemId, Array.from(selectedIngredients));
     }
 
     return (

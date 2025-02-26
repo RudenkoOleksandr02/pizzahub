@@ -1,0 +1,33 @@
+POST http://localhost:3000/api/cart
+Content-Type: application/json
+set-cookie: cartToken=11111
+
+{
+  "productItemId": 1,
+  "ingredientsIds": [1, 2, 3]
+}
+
+###
+PATCH http://localhost:3000/api/cart/1
+Content-Type: application/json
+Cookie: cartToken=11111
+
+{
+  "quantity": 3
+}
+
+###
+POST http://localhost:3000/api/users
+Content-Type: application/json
+
+{
+  "fullName": "Leonid Kasparov",
+  "email": "empty@gmail.com",
+  "password": "ertertert"
+}
+
+###
+GET http://localhost:3000/api/users
+Accept: application/json
+
+###
