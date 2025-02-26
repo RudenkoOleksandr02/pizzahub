@@ -182,7 +182,7 @@ model CartItem {
   cartId Int
 
   // Количество выбранных единиц продукта.
-  quantity Int
+  quantity Int @default(1)
 
   // Дополнительные ингредиенты, добавленные к продукту.
   ingredients Ingredient[]
