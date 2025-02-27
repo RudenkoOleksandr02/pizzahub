@@ -1,20 +1,13 @@
 import {Container, Filters, ProductsGroupList, Title, TopBar} from "@/components/shared";
-import {prisma} from "@/prisma/prisma-client";
+import {Suspense} from "react";
+import {findPizzas, GetSearchParams} from "@/lib/find-pizzas";
 
-export default async function Home() {
-    const categories = await prisma.category.findMany({
-        include: {
-            // Получаем связанные товары (products) для каждой категории
-            products: {
-                include: {
-                    // Включаем связанные элементы товаров (items)
-                    items: true,
-                    // Включаем связанные ингредиенты товаров (ingredients)
-                    ingredients: true
-                }
-            }
-        }
-    });
+// searchParams — это объект с параметрами запроса (query-параметрами) из URL
+// позволяет получать значения из строки запроса (?key=value)
+export default async function Home({ searchParams }: { searchParams: Promise<GetSearchParams> }) {
+    const params = await searchParams;
+    const categories = await findPizzas(params);
+    console.log(categories);
 
     return <>
         <Container className="mt-10">
@@ -28,7 +21,7 @@ export default async function Home() {
 
                 {/* Фильтрация */}
                 <div className="w-[250px]">
-                    <Filters/>
+                    <Suspense><Filters/></Suspense>
                 </div>
 
                 {/* Список товаров */}

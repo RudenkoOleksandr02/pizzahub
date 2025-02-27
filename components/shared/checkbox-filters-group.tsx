@@ -23,7 +23,6 @@ interface Props {
 
 export const CheckboxFiltersGroup: React.FC<Props> = ({
                                                           className,
-                                                          defaultValue,
                                                           defaultItems,
                                                           items,
                                                           title,

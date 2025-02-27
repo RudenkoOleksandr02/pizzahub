@@ -7,10 +7,19 @@ const __dirname = dirname(__filename);
 
 const compat = new FlatCompat({
   baseDirectory: __dirname,
+
 });
 
 const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
+
+  // Добавляем пользовательские правила
+  {
+    rules: {
+      '@next/next/no-img-element': 'off', // Отключаем правило
+      // Добавь другие правила по необходимости
+    },
+  },
 ];
 
 export default eslintConfig;

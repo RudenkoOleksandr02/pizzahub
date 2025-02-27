@@ -18,12 +18,12 @@ interface Props {
                                          children?: React.ReactNode;
                                        }
                                     */
-export const CartDrawer: React.FC<React.PropsWithChildren<Props>> = ({ className, children }) => {
+export const CartDrawer: React.FC<React.PropsWithChildren<Props>> = ({ children }) => {
     const {totalAmount, items, fetchCartItems, updateItemQuantity, removeCartItem} = useCartStore(state => state);
 
     React.useEffect(() => {
         fetchCartItems();
-    }, []);
+    }, [fetchCartItems]);
 
     const onClickCountButton = (id: number, quantity: number, type: 'plus' | 'minus') => {
         const newQuantity = type === 'plus' ? quantity + 1 : quantity - 1;
