@@ -7,7 +7,6 @@ import {findPizzas, GetSearchParams} from "@/lib/find-pizzas";
 export default async function Home({ searchParams }: { searchParams: Promise<GetSearchParams> }) {
     const params = await searchParams;
     const categories = await findPizzas(params);
-    console.log(categories);
 
     return <>
         <Container className="mt-10">

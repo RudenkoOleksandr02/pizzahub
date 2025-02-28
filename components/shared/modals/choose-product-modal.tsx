@@ -3,12 +3,10 @@
 import React from 'react';
 import {Dialog, DialogContent, DialogTitle} from "@/components/ui";
 import {cn} from "@/lib/utils";
-import { useRouter } from 'next/navigation';
-import {ChooseProductForm, ChoosePizzaForm} from "@/components/shared";
+import {useRouter} from 'next/navigation';
+import {ProductForm} from "@/components/shared";
 import {VisuallyHidden} from "@radix-ui/react-visually-hidden";
 import {ProductWithRelations} from "@/@types/prisma";
-import {useCartStore} from "@/store";
-import toast from "react-hot-toast";
 
 interface Props {
     product: ProductWithRelations;
@@ -17,50 +15,13 @@ interface Props {
 
 export const ChooseProductModal: React.FC<Props> = ({className, product}) => {
     const router = useRouter();
-    const firstItem = product.items[0];
-    const isPizzaForm = Boolean(firstItem.pizzaType);
-    const {addCartItem, loading} = useCartStore(state => state);
-
-    const onSubmit = async (productItemId?: number, ingredientsIds?: number[]) => {
-        try {
-            const productId = productItemId ?? firstItem.id;
-
-            await addCartItem({
-                productItemId: productId,
-                ingredientsIds
-            })
-
-            toast.success('Товар добавлен в корзину');
-            router.back()
-        } catch (error) {
-            toast.error('Не удалось добавить товар в корзину');
-            console.error(error);
-        }
-    }
 
     return (
         // router.back() - вернуться на предыдущий путь
         <Dialog open={Boolean(product)} onOpenChange={() => router.back()}>
             <VisuallyHidden><DialogTitle>{product.name}</DialogTitle></VisuallyHidden>
             <DialogContent className={cn("p-0 w-[1060px] max-w-[1060px] min-h-[500px] bg-white overflow-hidden", className)}>
-                {isPizzaForm ? (
-                    <ChoosePizzaForm
-                        name={product.name}
-                        imageUrl={product.imageUrl}
-                        ingredients={product.ingredients}
-                        items={product.items}
-                        onSubmit={onSubmit}
-                        loading={loading}
-                    />
-                ) : (
-                    <ChooseProductForm
-                        name={product.name}
-                        imageUrl={product.imageUrl}
-                        onSubmit={onSubmit}
-                        price={firstItem.price}
-                        loading={loading}
-                    />
-                )}
+                <ProductForm product={product} onSubmit={() => router.back()}/>
             </DialogContent>
         </Dialog>
     );

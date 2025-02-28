@@ -19,7 +19,8 @@ export const getCartDetails = (data: CartDTO): ReturnProps => {
         ingredients: item.ingredients.map(ingredient => ({
             name: ingredient.name,
             price: ingredient.price
-        }))
+        })),
+        disabled: false
     }));
 
     return {

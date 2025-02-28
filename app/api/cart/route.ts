@@ -60,25 +60,33 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
     try {
         let token = req.cookies.get('cartToken')?.value;
-
         if (!token) {
             token = crypto.randomUUID();
         }
 
         const userCart = await findOrCreateCart(token);
-
         const data = (await req.json()) as CreateCartItemValuesDTO;
 
-        // если товар есть, увеличить его количество (товар с одним и тем же id, одинаковыми ингридиентами)
-        const findCartItem = await prisma.cartItem.findFirst({
-            // найти по
+        // Получаем все cartItem с заданным productItemId
+        const cartItems = await prisma.cartItem.findMany({
             where: {
                 cartId: userCart.id,
                 productItemId: data.productItemId,
-                // каждый id ингредиента который будет у меня, связан с этим cartItem, должен соответствовать тому массиву, который передам от клиента
-                ingredients: { every: { id: { in: data.ingredientsIds }}}
-            }
-        })
+            },
+            include: {
+                ingredients: true,
+            },
+        });
+
+        // Сортируем массив ингредиентов, пришедших от клиента
+        const targetIngredientsIds = (data.ingredientsIds || []).sort();
+
+        // Находим запись, у которой ингредиенты совпадают полностью (по содержимому и количеству)
+        const findCartItem = cartItems.find((item) => {
+            // Получаем массив id ингредиентов для данной записи и сортируем его
+            const itemIngredientsIds = item.ingredients.map(ing => ing.id).sort();
+            return JSON.stringify(itemIngredientsIds) === JSON.stringify(targetIngredientsIds);
+        });
 
         // если товар был найден, делаю + 1
         if (findCartItem) {
