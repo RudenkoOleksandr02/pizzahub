@@ -12,9 +12,13 @@ import {useCart} from "@/hooks";
 import {FormProvider, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {CheckoutFormValues, checkoutFormSchema} from "@/constants";
+import {createOrder} from "@/app/actions";
+import toast from "react-hot-toast";
+import React from "react";
 
 export default function CheckoutPage() {
     const {items, totalAmount, updateItemQuantity, removeCartItem, loading} = useCart();
+    const [submitting, setSubmitting] = React.useState(false);
 
     // Инициализация useForm с валидацией через Zod и начальными значениями
     const form = useForm<CheckoutFormValues>({
@@ -29,8 +33,21 @@ export default function CheckoutPage() {
         }
     });
 
-    const onSubmit = (data: CheckoutFormValues) => {
-        console.log(data)
+    const onSubmit = async (data: CheckoutFormValues) => {
+        try {
+            setSubmitting(true);
+
+            // Отправляем данные на сервер для создания заказа и получаем URL для оплаты
+            const url = await createOrder(data);
+            toast.success('Переход на оплату...');
+
+            // Проверяем, что сервер вернул ссылку, и перенаправляем пользователя на страницу оплаты
+            if (url) location.href = url;
+        } catch (error) {
+            console.error(error);
+            setSubmitting(false);
+            toast.error('Не удалось создать заказ');
+        }
     }
 
     const onClickCountButton = (id: number, quantity: number, type: 'plus' | 'minus') => {
@@ -57,7 +74,7 @@ export default function CheckoutPage() {
 
                         {/* Правая часть */}
                         <div className="w-[450px]">
-                            <CheckoutSidebar totalAmount={totalAmount} loading={loading}/>
+                            <CheckoutSidebar totalAmount={totalAmount} loading={loading || submitting}/>
                         </div>
                     </div>
                 </form>
