@@ -169,7 +169,7 @@ model Cart {
 }
 
 // Модель элемента корзины (конкретный продукт с вариацией и дополнительными ингредиентами)
-model CheckoutItem {
+model CartItem {
   // Идентификатор элемента корзины.
   id Int @id @default(autoincrement())
 
