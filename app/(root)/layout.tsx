@@ -1,8 +1,9 @@
-import type { Metadata } from "next";
+import type {Metadata} from "next";
 import {Header} from "@/components/shared/header";
+import {Suspense} from "react";
 
 export const metadata: Metadata = {
-  title: "Next Pizza | Главная"
+    title: "Next Pizza | Главная"
 };
 
 export default function RootLayout(
@@ -10,11 +11,14 @@ export default function RootLayout(
         children: React.ReactNode,
         modal: React.ReactNode
     }>) {
-  return (
+    return (
         <main className="min-h-screen">
-            <Header/>
+            {/* если есть в компоненте useSearchParams(), компонент нужно обернуть в Suspense*/}
+            <Suspense>
+                <Header/>
+            </Suspense>
             {children}
             {modal}
         </main>
-  );
+    );
 }

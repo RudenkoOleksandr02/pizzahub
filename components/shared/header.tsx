@@ -20,16 +20,17 @@ export const Header: React.FC<Props> = ({className, hasSearch = true, hasCart = 
     const searchParams = useSearchParams();
 
     React.useEffect(() => {
-        if (searchParams.has('paid')) {
-            toast.success('Заказ успешно оплачен! Информация отправлена на почту.')
-        }
-        if (searchParams.has('verified')) {
-            toast.success('Почта успешно подтверждена!')
-        }
+        const isPaid = searchParams.has('paid');
+        const isVerified = searchParams.has('verified');
 
-        setTimeout(() => {
-            router.replace('/')
-        }, 1000)
+        if (isPaid) toast.success('Заказ успешно оплачен! Информация отправлена на почту.');
+        if (isVerified) toast.success('Почта успешно подтверждена!');
+
+        if (isVerified || isPaid) {
+            setTimeout(() => {
+                router.replace('/')
+            }, 1000);
+        }
     }, []);
 
     return (

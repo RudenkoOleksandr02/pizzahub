@@ -15,10 +15,13 @@ import {CheckoutFormValues, checkoutFormSchema} from "@/constants";
 import {createOrder} from "@/app/actions";
 import toast from "react-hot-toast";
 import React from "react";
+import {useSession} from "next-auth/react";
+import {Api} from "@/services/api-client";
 
 export default function CheckoutPage() {
     const {items, totalAmount, updateItemQuantity, removeCartItem, loading} = useCart();
     const [submitting, setSubmitting] = React.useState(false);
+    const {data: session} = useSession();
 
     // Инициализация useForm с валидацией через Zod и начальными значениями
     const form = useForm<CheckoutFormValues>({
@@ -32,6 +35,21 @@ export default function CheckoutPage() {
             comment: ''
         }
     });
+
+    React.useEffect(() => {
+        async function fetchUserInfo() {
+            const data = await Api.auth.getMe();
+            const [firstName, lastName] = data.fullName.split(' ');
+
+            form.setValue('firstName', firstName);
+            form.setValue('lastName', lastName);
+            form.setValue('email', data.email);
+        }
+
+        if (session) {
+            fetchUserInfo();
+        }
+    }, [session]);
 
     const onSubmit = async (data: CheckoutFormValues) => {
         try {
