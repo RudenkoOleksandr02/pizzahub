@@ -28,7 +28,7 @@ model User {
   role UserRole @default(USER)
 
   // Когда пользователь подтвержден
-  verified DateTime
+  verified DateTime?
 
   // Дополнительные поля для соц. аутентификации (например, GitHub, Gmail).
   provider   String?
@@ -41,7 +41,7 @@ model User {
   orders Order[]
 
   // Связь "один к одному": привязка к коду верификации (для подтверждения действий).
-  verificationCode VarificationCode?
+  verificationCode VerificationCode?
 
   // Дата и время создания пользователя (устанавливается автоматически).
   createdAt DateTime @default(now())
@@ -235,7 +235,7 @@ model Order {
 }
 
 // Модель кода верификации для подтверждения возможности создания заказа пользователем
-model VarificationCode {
+model VerificationCode {
   // Идентификатор записи.
   id Int @id @default(autoincrement())
 
@@ -249,8 +249,8 @@ model VarificationCode {
   // Дата создания кода верификации.
   createdAt DateTime @default(now())
 
-  // Если необходимо обеспечить уникальность комбинации userId и code, можно раскомментировать индекс ниже.
-  // @@unique([userId, code])
+  // Обеспечить уникальность комбинации userId и code
+  @@unique([userId, code])
 }
 
 // Enum для статуса заказа

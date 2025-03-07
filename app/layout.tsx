@@ -1,6 +1,6 @@
 import {Nunito} from "next/font/google";
 import './globals.css';
-import { Toaster } from 'react-hot-toast';
+import {Providers} from "@/components/shared/providers";
 
 
 const nunito = Nunito({
@@ -13,9 +13,7 @@ export default function GlobalLayout({children}: Readonly<{ children: React.Reac
     return (
         <html lang="en">
             <body className={nunito.className}>
-                {children}
-                {/* Toaster как провайдер */}
-                <Toaster/>
+                <Providers>{children}</Providers>
             </body>
         </html>
     );

@@ -2,13 +2,11 @@
 
 import React from 'react';
 import {cn} from "@/lib/utils";
-import {CartButton, Container, SearchInput} from "./index";
-import {Button} from "../ui/index";
+import {AuthModal, CartButton, Container, ProfileButton, SearchInput} from "./index";
 import Image from "next/image";
-import {User} from 'lucide-react';
 import Link from 'next/link';
 import toast from "react-hot-toast";
-import {useSearchParams} from "next/navigation";
+import {useRouter, useSearchParams} from "next/navigation";
 
 interface Props {
     hasSearch?: boolean;
@@ -17,12 +15,21 @@ interface Props {
 }
 
 export const Header: React.FC<Props> = ({className, hasSearch = true, hasCart = true}) => {
+    const router = useRouter();
+    const [openAuthModal, setOpenAuthModal] = React.useState(false);
     const searchParams = useSearchParams();
 
     React.useEffect(() => {
         if (searchParams.has('paid')) {
             toast.success('Заказ успешно оплачен! Информация отправлена на почту.')
         }
+        if (searchParams.has('verified')) {
+            toast.success('Почта успешно подтверждена!')
+        }
+
+        setTimeout(() => {
+            router.replace('/')
+        }, 1000)
     }, []);
 
     return (
@@ -47,10 +54,10 @@ export const Header: React.FC<Props> = ({className, hasSearch = true, hasCart = 
 
                 {/* Правая часть */}
                 <div className="flex items-center gap-3">
-                    <Button variant="outline" className="flex items-center gap-1">
-                        <User size={16}/>
-                        Войти
-                    </Button>
+                    <AuthModal open={openAuthModal} onClose={() => setOpenAuthModal(false)}/>
+
+                    <ProfileButton onClickSignIn={() => setOpenAuthModal(true)}/>
+
                     {hasCart && <CartButton/>}
                 </div>
             </Container>
