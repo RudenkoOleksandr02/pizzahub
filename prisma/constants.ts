@@ -1,198 +1,237 @@
 export const categories = [
     {
-        name: 'Пиццы'
+        name: 'Піци'
     },
     {
-        name: 'Завтрак'
+        name: 'Сніданок'
     },
     {
         name: 'Закуски'
     },
     {
-        name: 'Коктейли'
+        name: 'Коктейлі'
     },
     {
-        name: 'Напитики'
+        name: 'Напої'
     },
 ];
 
 export const ingredients = [
     {
-        name: 'Сырный бортик',
-        price: 179,
+        name: 'Сирний бортик',
+        price: 90,
         imageUrl:
-            'https://cdn.dodostatic.net/static/Img/Ingredients/99f5cb91225b4875bd06a26d2e842106.png',
+            'https://res.cloudinary.com/dbie9rxsq/image/upload/v1741600994/ForNextPizza/ingredients/xedxb4r8mqx2vgnr9f29.png',
     },
     {
-        name: 'Сливочная моцарелла',
-        price: 79,
+        name: 'Вершкова моцарела',
+        price: 40,
         imageUrl:
-            'https://cdn.dodostatic.net/static/Img/Ingredients/cdea869ef287426386ed634e6099a5ba.png',
+            'https://res.cloudinary.com/dbie9rxsq/image/upload/v1741601016/ForNextPizza/ingredients/c7bmxdtajhgpf2qletrr.png',
     },
     {
-        name: 'Сыры чеддер и пармезан',
-        price: 79,
-        imageUrl: 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A22FA54A81411E9AFA69C1FE796',
+        name: 'Сири чеддер і пармезан',
+        price: 40,
+        imageUrl: 'https://res.cloudinary.com/dbie9rxsq/image/upload/v1741601024/ForNextPizza/ingredients/tym1w1vutvlu9ypdt7dd.png',
     },
     {
-        name: 'Острый перец халапеньо',
-        price: 59,
+        name: 'Гострий перець халапеньйо',
+        price: 30,
         imageUrl:
-            'https://cdn.dodostatic.net/static/Img/Ingredients/11ee95b6bfdf98fb88a113db92d7b3df.png',
+            'https://res.cloudinary.com/dbie9rxsq/image/upload/v1741601032/ForNextPizza/ingredients/bspzldm4f8p1u3vprpuf.png',
     },
     {
-        name: 'Нежный цыпленок',
-        price: 79,
-        imageUrl: 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A39D824A82E11E9AFA5B328D35A',
+        name: 'Ніжний курча',
+        price: 40,
+        imageUrl: 'https://res.cloudinary.com/dbie9rxsq/image/upload/v1741601040/ForNextPizza/ingredients/e93naqjwjiououq1yqn0.png',
     },
     {
-        name: 'Шампиньоны',
-        price: 59,
-        imageUrl: 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A22FA54A81411E9AFA67259A324',
+        name: 'Шампіньйони',
+        price: 30,
+        imageUrl: 'https://res.cloudinary.com/dbie9rxsq/image/upload/v1741601049/ForNextPizza/ingredients/kktpwf1yhxhvdgmefau4.png',
     },
     {
-        name: 'Ветчина',
-        price: 79,
-        imageUrl: 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A39D824A82E11E9AFA61B9A8D61',
+        name: 'Шинка',
+        price: 40,
+        imageUrl: 'https://res.cloudinary.com/dbie9rxsq/image/upload/v1741601057/ForNextPizza/ingredients/p2zwyqpkrwcpsrnqrzyt.png',
     },
     {
-        name: 'Пикантная пепперони',
-        price: 79,
-        imageUrl: 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A22FA54A81411E9AFA6258199C3',
+        name: 'Пікантна пепероні',
+        price: 40,
+        imageUrl: 'https://res.cloudinary.com/dbie9rxsq/image/upload/v1741601065/ForNextPizza/ingredients/spluvyvzxerig6ey65cf.png',
     },
     {
-        name: 'Острая чоризо',
-        price: 79,
-        imageUrl: 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A22FA54A81411E9AFA62D5D6027',
+        name: 'Гостра чорізо',
+        price: 40,
+        imageUrl: 'https://res.cloudinary.com/dbie9rxsq/image/upload/v1741601072/ForNextPizza/ingredients/zi6d3fitjl5gcoqfaeki.png',
     },
     {
-        name: 'Маринованные огурчики',
-        price: 59,
-        imageUrl: 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A21DA51A81211E9EA89958D782B',
+        name: 'Мариновані огірочки',
+        price: 30,
+        imageUrl: 'https://res.cloudinary.com/dbie9rxsq/image/upload/v1741601075/ForNextPizza/ingredients/ngb2dtd8ntqr9phoayeh.png',
     },
     {
-        name: 'Свежие томаты',
-        price: 59,
-        imageUrl: 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A39D824A82E11E9AFA7AC1A1D67',
+        name: 'Свіжі томати',
+        price: 30,
+        imageUrl: 'https://res.cloudinary.com/dbie9rxsq/image/upload/v1741601082/ForNextPizza/ingredients/sxzgpbby3tb4fo0vztnw.png',
     },
     {
-        name: 'Красный лук',
-        price: 59,
-        imageUrl: 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A22FA54A81411E9AFA60AE6464C',
+        name: 'Червона цибуля',
+        price: 30,
+        imageUrl: 'https://res.cloudinary.com/dbie9rxsq/image/upload/v1741601093/ForNextPizza/ingredients/z3fb704qfxgdlptzij71.png',
     },
     {
-        name: 'Сочные ананасы',
-        price: 59,
-        imageUrl: 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A21DA51A81211E9AFA6795BA2A0',
+        name: 'Соковиті ананаси',
+        price: 30,
+        imageUrl: 'https://res.cloudinary.com/dbie9rxsq/image/upload/v1741601097/ForNextPizza/ingredients/gqloyuhwtid6skn428if.png',
     },
     {
-        name: 'Итальянские травы',
-        price: 39,
+        name: 'Італійські трави',
+        price: 20,
         imageUrl:
-            'https://cdn.dodostatic.net/static/Img/Ingredients/370dac9ed21e4bffaf9bc2618d258734.png',
+            'https://res.cloudinary.com/dbie9rxsq/image/upload/v1741601106/ForNextPizza/ingredients/iagxjlffdlzczstiwt7s.png',
     },
     {
-        name: 'Сладкий перец',
-        price: 59,
-        imageUrl: 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A22FA54A81411E9AFA63F774C1B',
+        name: 'Солодкий перець',
+        price: 30,
+        imageUrl: 'https://res.cloudinary.com/dbie9rxsq/image/upload/v1741601112/ForNextPizza/ingredients/ejwv6xqt2wbiwyczpi7v.png',
     },
     {
-        name: 'Кубики брынзы',
-        price: 79,
-        imageUrl: 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A39D824A82E11E9AFA6B0FFC349',
+        name: 'Кубики бринзи',
+        price: 40,
+        imageUrl: 'https://res.cloudinary.com/dbie9rxsq/image/upload/v1741601126/ForNextPizza/ingredients/llmtitru86kq8guypfmr.png',
     },
     {
-        name: 'Митболы',
-        price: 79,
+        name: 'Мітболи',
+        price: 40,
         imageUrl:
-            'https://cdn.dodostatic.net/static/Img/Ingredients/b2f3a5d5afe44516a93cfc0d2ee60088.png',
+            'https://res.cloudinary.com/dbie9rxsq/image/upload/v1741601129/ForNextPizza/ingredients/rrmhlpucdretiapz3ey0.png',
     }
-].map((obj, index) => ({ id: index + 1, ...obj }));
+].map((obj, index) => ({id: index + 1, ...obj}));
 
 export const products = [
+    // Сніданок
     {
-        name: 'Омлет с ветчиной и грибами',
-        imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EE7970321044479C1D1085457A36EB.webp',
+        name: 'Омлет із пепероні',
+        imageUrl: 'https://res.cloudinary.com/dbie9rxsq/image/upload/v1741598932/ForNextPizza/z7b0nqrlorv8daprop22.avif',
         categoryId: 2,
     },
     {
-        name: 'Омлет с пепперони',
-        imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EE94ECF33B0C46BA410DEC1B1DD6F8.webp',
+        name: 'Додстер із шинкою',
+        imageUrl: 'https://res.cloudinary.com/dbie9rxsq/image/upload/v1741598932/ForNextPizza/eyrjimrjc1dfonxfh5mu.avif',
         categoryId: 2,
     },
     {
-        name: 'Кофе Латте',
-        imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EE7D61B0C26A3F85D97A78FEEE00AD.webp',
+        name: 'Омлет сирний',
+        imageUrl: 'https://res.cloudinary.com/dbie9rxsq/image/upload/v1741598933/ForNextPizza/kdiuvalg2nddomczg61b.avif',
         categoryId: 2,
     },
     {
-        name: 'Дэнвич ветчина и сыр',
-        imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EE796FF0059B799A17F57A9E64C725.webp',
+        name: 'Омлет з шинкою та грибами',
+        imageUrl: 'https://res.cloudinary.com/dbie9rxsq/image/upload/v1741598933/ForNextPizza/bqzqamdl4kocawdjs5tk.avif',
+        categoryId: 2,
+    },
+    {
+        name: 'Омлет із беконом',
+        imageUrl: 'https://res.cloudinary.com/dbie9rxsq/image/upload/v1741598933/ForNextPizza/eu9xo7zt1bqpfi0gdxbo.avif',
+        categoryId: 2,
+    },
+    {
+        name: 'Сирники зі згущеним молоком',
+        imageUrl: 'https://res.cloudinary.com/dbie9rxsq/image/upload/v1741598933/ForNextPizza/iyx23awjevw1gvqre3xn.avif',
+        categoryId: 2,
+    },
+    {
+        name: 'Сирники',
+        imageUrl: 'https://res.cloudinary.com/dbie9rxsq/image/upload/v1741598979/ForNextPizza/zmputabsvyusl6teuolb.avif',
+        categoryId: 2,
+    },
+    {
+        name: 'Сирники з малиновим варенням',
+        imageUrl: 'https://res.cloudinary.com/dbie9rxsq/image/upload/v1741598981/ForNextPizza/hqyptdkkpyeqjmjmg1cg.avif',
+        categoryId: 2,
+    },
+    // Закуски
+    {
+        name: 'Паста Карбонара',
+        imageUrl: 'https://res.cloudinary.com/dbie9rxsq/image/upload/v1741599144/ForNextPizza/tjyf4pnruazhmuhge1of.avif',
         categoryId: 3,
     },
     {
-        name: 'Куриные наггетсы',
-        imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EE7D618B5C7EC29350069AE9532C6E.webp',
+        name: 'Додстер із шинкою',
+        imageUrl: 'https://res.cloudinary.com/dbie9rxsq/image/upload/v1741599144/ForNextPizza/gpwcg7fjz5n8rzq6lfwi.avif',
         categoryId: 3,
     },
     {
-        name: 'Картофель из печи с соусом 🌱',
-        imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EED646A9CD324C962C6BEA78124F19.webp',
+        name: 'Курячі крила барбекю',
+        imageUrl: 'https://res.cloudinary.com/dbie9rxsq/image/upload/v1741599144/ForNextPizza/hoxsnzvicyvs1wg8msdz.avif',
+        categoryId: 3,
+    },
+    {
+        name: 'Суперм\'ясний Додстер',
+        imageUrl: 'https://res.cloudinary.com/dbie9rxsq/image/upload/v1741599144/ForNextPizza/t6wmwnzoeeib7tvvuiyg.avif',
         categoryId: 3,
     },
     {
         name: 'Додстер',
-        imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EE796F96D11392A2F6DD73599921B9.webp',
+        imageUrl: 'https://res.cloudinary.com/dbie9rxsq/image/upload/v1741599144/ForNextPizza/idghsku5wj4nfizv4k1q.avif',
         categoryId: 3,
     },
     {
-        name: 'Острый Додстер 🌶️🌶️',
-        imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EE796FD3B594068F7A752DF8161D04.webp',
+        name: 'Паста з креветками',
+        imageUrl: 'https://res.cloudinary.com/dbie9rxsq/image/upload/v1741599145/ForNextPizza/sttjemiqbvhrypor4cas.avif',
         categoryId: 3,
     },
     {
-        name: 'Банановый молочный коктейль',
-        imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EEE20B8772A72A9B60CFB20012C185.webp',
+        name: 'Курячі нагетси',
+        imageUrl: 'https://res.cloudinary.com/dbie9rxsq/image/upload/v1741599145/ForNextPizza/tuoddesstnd1joivxnbq.avif',
+        categoryId: 3,
+    },
+    {
+        name: 'Паста Песто',
+        imageUrl: 'https://res.cloudinary.com/dbie9rxsq/image/upload/v1741599145/ForNextPizza/lajb0a0aftd4gbode6kx.avif',
+        categoryId: 3,
+    },
+    // Коктейлі
+    {
+        name: 'Банановий молочний коктейль',
+        imageUrl: 'https://res.cloudinary.com/dbie9rxsq/image/upload/v1741599542/ForNextPizza/ehz82x63cmdrjdcblsdf.webp',
         categoryId: 4,
     },
     {
-        name: 'Карамельное яблоко молочный коктейль',
-        imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EE79702E2A22E693D96133906FB1B8.webp',
+        name: 'Карамельне яблуко молочний коктейль',
+        imageUrl: 'https://res.cloudinary.com/dbie9rxsq/image/upload/v1741599542/ForNextPizza/jgeovskmf0wukxdbmciu.webp',
         categoryId: 4,
     },
     {
-        name: 'Молочный коктейль с печеньем Орео',
-        imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EE796FA1F50F8F8111A399E4C1A1E3.webp',
+        name: 'Молочний коктейль із печивом Орео',
+        imageUrl: 'https://res.cloudinary.com/dbie9rxsq/image/upload/v1741599542/ForNextPizza/zcyaw58bcw0mxqoc7ipu.webp',
         categoryId: 4,
     },
     {
-        name: 'Классический молочный коктейль 👶',
-        imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EE796F93FB126693F96CB1D3E403FB.webp',
+        name: 'Класичний молочний коктейль',
+        imageUrl: 'https://res.cloudinary.com/dbie9rxsq/image/upload/v1741599542/ForNextPizza/idi05jrtewixehgzkajy.webp',
         categoryId: 4,
     },
+    // Напої
     {
-        name: 'Ирландский Капучино',
-        imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EE7D61999EBDA59C10E216430A6093.webp',
+        name: 'Кава Карамельна капучино',
+        imageUrl: 'https://res.cloudinary.com/dbie9rxsq/image/upload/v1741599433/ForNextPizza/xwj2xjrdzey3zl8difkb.webp',
         categoryId: 5,
     },
     {
-        name: 'Кофе Карамельный капучино',
-        imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EE7D61AED6B6D4BFDAD4E58D76CF56.webp',
+        name: 'Кава Кокосова латте',
+        imageUrl: 'https://res.cloudinary.com/dbie9rxsq/image/upload/v1741599433/ForNextPizza/tmzbnjqkrmc6mw3bbkcz.webp',
         categoryId: 5,
     },
     {
-        name: 'Кофе Кокосовый латте',
-        imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EE7D61B19FA07090EE88B0ED347F42.webp',
+        name: 'Кава Американо',
+        imageUrl: 'https://res.cloudinary.com/dbie9rxsq/image/upload/v1741599433/ForNextPizza/w95bji31fdxuvwn40kdd.webp',
         categoryId: 5,
     },
     {
-        name: 'Кофе Американо',
-        imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EE7D61B044583596548A59078BBD33.webp',
-        categoryId: 5,
-    },
-    {
-        name: 'Кофе Латте',
-        imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EE7D61B0C26A3F85D97A78FEEE00AD.webp',
+        name: 'Кава Латте',
+        imageUrl: 'https://res.cloudinary.com/dbie9rxsq/image/upload/v1741599433/ForNextPizza/jq0flkio6htemud6kzxv.webp',
         categoryId: 5,
     },
 ];

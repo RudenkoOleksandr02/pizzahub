@@ -1,287 +1,140 @@
-// Генерация клиента для JavaScript (Prisma Client JS)
 generator client {
   provider = "prisma-client-js"
 }
 
-// Настройка источника данных: подключение к PostgreSQL.
-// URL подключения берётся из переменной окружения DATABASE_URL.
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-// Модель пользователя
 model User {
-  // Идентификатор пользователя (первичный ключ), автоматически инкрементируется.
-  id Int @id @default(autoincrement())
-
-  // Полное имя пользователя.
-  fullName String
-
-  // Уникальный email пользователя.
-  email String @unique
-
-  // Пароль пользователя.
-  password String
-
-  // Роль пользователя. По умолчанию значение - USER.
-  role UserRole @default(USER)
-
-  // Когда пользователь подтвержден
-  verified DateTime?
-
-  // Дополнительные поля для соц. аутентификации (например, GitHub, Gmail).
-  provider   String?
-  providerId String?
-
-  // Связь "один к одному" с корзиной: пользователь может иметь одну корзину.
-  cart Cart?
-
-  // Связь "один ко многим": у пользователя может быть несколько заказов.
-  orders Order[]
-
-  // Связь "один к одному": привязка к коду верификации (для подтверждения действий).
+  id               Int               @id @default(autoincrement())
+  fullName         String
+  email            String            @unique
+  password         String
+  role             UserRole          @default(USER)
+  verified         DateTime?
+  provider         String?
+  providerId       String?
+  cart             Cart?
+  orders           Order[]
   verificationCode VerificationCode?
-
-  // Дата и время создания пользователя (устанавливается автоматически).
-  createdAt DateTime @default(now())
-
-  // Дата и время последнего обновления (автоматически обновляется).
-  updatedAt DateTime @updatedAt
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
 }
 
-// Модель категории для продуктов
 model Category {
-  // Идентификатор категории (первичный ключ) с автогенерацией.
-  id Int @id @default(autoincrement())
-
-  // Название категории, должно быть уникальным.
-  name String @unique
-
-  // Связь "один ко многим": категория может содержать множество продуктов.
+  id       Int       @id @default(autoincrement())
+  name     String    @unique
   products Product[]
 }
 
-// Модель продукта
 model Product {
-  // Идентификатор продукта (первичный ключ).
-  id Int @id @default(autoincrement())
-
-  // Название продукта.
-  name String
-
-  // URL изображения продукта.
-  imageUrl String
-
-  // Связь "один ко многим": каждый продукт принадлежит определённой категории.
-  // Здесь используется поле categoryId для связи с моделью Category.
-  category Category @relation(fields: [categoryId], references: [id])
-
-  // Вспомогательное поле для хранения внешнего ключа к категории.
-  categoryId Int
-
-  // Связь "многие ко многим": продукт может содержать несколько ингредиентов.
+  id          Int           @id @default(autoincrement())
+  name        String
+  imageUrl    String
+  category    Category      @relation(fields: [categoryId], references: [id])
+  categoryId  Int
   ingredients Ingredient[]
-
-  // Связь "один ко многим": продукт может иметь несколько вариаций (разные размеры, типы и т.п.).
-  items ProductItem[]
-
-  // Дата создания продукта.
-  createdAt DateTime @default(now())
-
-  // Дата обновления продукта.
-  updatedAt DateTime @updatedAt
+  items       ProductItem[]
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
 }
 
-// Модель вариации продукта (например, размер, цена, тип пиццы и т.д.)
 model ProductItem {
-  // Идентификатор вариации.
-  id Int @id @default(autoincrement())
-
-  // Цена вариации (обязательное поле).
-  price Int
-
-  // Размер вариации (необязательное поле).
-  size Int?
-
-  // Тип пиццы (или теста) (необязательное поле).
+  id        Int        @id @default(autoincrement())
+  price     Int
+  size      Int?
   pizzaType Int?
-
-  // Связь: каждая вариация относится к одному продукту.
-  product   Product @relation(fields: [productId], references: [id])
+  product   Product    @relation(fields: [productId], references: [id])
   productId Int
-
-  // Связь "один ко многим": вариация может быть добавлена в несколько элементов корзины.
   cartItems CartItem[]
 }
 
-// Модель ингредиента
 model Ingredient {
-  // Идентификатор ингредиента.
-  id Int @id @default(autoincrement())
-
-  // Название ингредиента.
-  name String
-
-  // Цена ингредиента.
-  price Int
-
-  // URL изображения ингредиента.
-  imageUrl String
-
-  // Связь "многие ко многим": ингредиент может входить в состав нескольких продуктов.
-  products Product[]
-
-  // Связь "один ко многим": ингредиент может добавляться в элементы корзины.
+  id        Int        @id @default(autoincrement())
+  name      String
+  price     Int
+  imageUrl  String
+  products  Product[]
   cartItems CartItem[]
-
-  // Дата создания записи об ингредиенте.
-  createdAt DateTime @default(now())
-
-  // Дата обновления записи.
-  updatedAt DateTime @updatedAt
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
 }
 
-// Модель корзины
 model Cart {
-  // Идентификатор корзины.
-  id Int @id @default(autoincrement())
-
-  // Связь "один к одному": корзина может быть привязана к пользователю.
-  // Поле userId уникально, что исключает возможность иметь несколько корзин на одного пользователя.
-  user   User? @relation(fields: [userId], references: [id])
-  userId Int?  @unique
-
-  // Токен для идентификации корзины, используется для незарегистрированных пользователей.
-  token String
-
-  // Общая сумма в корзине, по умолчанию 0.
-  totalAmount Int @default(0)
-
-  // Связь "один ко многим": корзина может содержать несколько элементов (CheckoutItem).
-  items CartItem[]
-
-  // Дата создания корзины.
-  createdAt DateTime @default(now())
-
-  // Дата обновления корзины.
-  updatedAt DateTime @updatedAt
+  id          Int        @id @default(autoincrement())
+  user        User?      @relation(fields: [userId], references: [id])
+  userId      Int?       @unique
+  token       String
+  totalAmount Int        @default(0)
+  items       CartItem[]
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
 }
 
-// Модель элемента корзины (конкретный продукт с вариацией и дополнительными ингредиентами)
 model CartItem {
-  // Идентификатор элемента корзины.
-  id Int @id @default(autoincrement())
-
-  // Связь: элемент корзины относится к конкретной вариации продукта.
-  productItem   ProductItem @relation(fields: [productItemId], references: [id])
+  id            Int          @id @default(autoincrement())
+  productItem   ProductItem  @relation(fields: [productItemId], references: [id])
   productItemId Int
-
-  // Связь: элемент корзины принадлежит конкретной корзине.
-  cart   Cart @relation(fields: [cartId], references: [id])
-  cartId Int
-
-  // Количество выбранных единиц продукта.
-  quantity Int @default(1)
-
-  // Дополнительные ингредиенты, добавленные к продукту.
-  ingredients Ingredient[]
-
-  // Дата создания элемента корзины.
-  createdAt DateTime @default(now())
-
-  // Дата обновления элемента.
-  updatedAt DateTime @updatedAt
+  cart          Cart         @relation(fields: [cartId], references: [id])
+  cartId        Int
+  quantity      Int          @default(1)
+  ingredients   Ingredient[]
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
 }
 
-// Модель заказа
 model Order {
-  // Идентификатор заказа.
-  id Int @id @default(autoincrement())
-
-  // Связь: заказ может быть привязан к пользователю (необязательно, если заказ сделан гостем).
-  user   User? @relation(fields: [userId], references: [id])
-  userId Int?
-
-  // Токен заказа, может использоваться для идентификации сессии или гостевого заказа.
-  token String
-
-  // Общая сумма заказа.
+  id          Int         @id @default(autoincrement())
+  user        User?       @relation(fields: [userId], references: [id])
+  userId      Int?
+  token       String
   totalAmount Int
-
-  // Статус заказа (используется enum OrderStatus).
-  status OrderStatus
-
-  // Идентификатор платежа (например, для интеграции с платёжными сервисами).
-  paymentId String?
-
-  // Список товаров в заказе в формате JSON.
-  items Json
-
-  // Контактная информация для доставки: имя, email, телефон, адрес.
-  fullName String
-  email    String
-  phone    String
-  address  String
-
-  // Комментарий к заказу (необязательное поле).
-  comment String?
-
-  // Дата создания заказа.
-  createdAt DateTime @default(now())
-
-  // Дата обновления заказа.
-  updatedAt DateTime @updatedAt
+  status      OrderStatus
+  paymentId   String?
+  items       Json
+  fullName    String
+  email       String
+  phone       String
+  address     String
+  comment     String?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
 }
 
-// Модель кода верификации для подтверждения возможности создания заказа пользователем
 model VerificationCode {
-  // Идентификатор записи.
-  id Int @id @default(autoincrement())
-
-  // Связь "один к одному": код верификации привязан к конкретному пользователю.
-  user   User @relation(fields: [userId], references: [id])
-  userId Int  @unique
-
-  // Сам код верификации.
-  code String
-
-  // Дата создания кода верификации.
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int      @unique
+  code      String
   createdAt DateTime @default(now())
 
-  // Обеспечить уникальность комбинации userId и code
   @@unique([userId, code])
 }
 
 model Story {
-  id              Int    @id @default(autoincrement())
+  id              Int         @id @default(autoincrement())
   previewImageUrl String
-
-  items StoryItem[]
-
-  createdAt DateTime @default(now())
+  items           StoryItem[]
+  createdAt       DateTime    @default(now())
 }
 
 model StoryItem {
-  id Int @id @default(autoincrement())
-
-  storyId Int
-  story   Story @relation(fields: [storyId], references: [id])
-
+  id        Int      @id @default(autoincrement())
+  storyId   Int
+  story     Story    @relation(fields: [storyId], references: [id])
   sourceUrl String
-
   createdAt DateTime @default(now())
 }
 
-// Enum для статуса заказа
 enum OrderStatus {
-  PENDING // Ожидание обработки
-  SUCCEEDED // Заказ успешно обработан
-  CANCELLED // Заказ отменён
+  PENDING
+  SUCCEEDED
+  CANCELLED
 }
 
-// Enum для роли пользователя
 enum UserRole {
-  USER // Обычный пользователь
-  ADMIN // Администратор
+  USER
+  ADMIN
 }
