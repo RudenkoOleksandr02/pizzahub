@@ -11,7 +11,7 @@ export default async function ProductModalPage({ params }: {params: Promise<{ id
             ingredients: true,
             items: true
         }
-    })
+    });
 
     if (!product) return notFound();
 
