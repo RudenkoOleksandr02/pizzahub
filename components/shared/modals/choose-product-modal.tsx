@@ -15,7 +15,11 @@ interface Props {
 
 export const ChooseProductModal: React.FC<Props> = ({className, product}) => {
     const router = useRouter();
-    const [openModal, setOpenModal] = React.useState(Boolean(product));
+    const [openModal, setOpenModal] = React.useState(false);
+
+    React.useEffect(() => {
+        setOpenModal(Boolean(product));
+    }, [product]);
 
     const onOpenChange = () => {
         setOpenModal(false);
