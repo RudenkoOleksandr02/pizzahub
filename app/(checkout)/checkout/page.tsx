@@ -17,6 +17,7 @@ import toast from "react-hot-toast";
 import React from "react";
 import {useSession} from "next-auth/react";
 import {Api} from "@/services/api-client";
+import {redirect} from "next/navigation";
 
 export default function CheckoutPage() {
     const {items, totalAmount, updateItemQuantity, removeCartItem, loading} = useCart();
@@ -69,6 +70,7 @@ export default function CheckoutPage() {
         const newQuantity = type === 'plus' ? quantity + 1 : quantity - 1;
         updateItemQuantity(id, newQuantity)
     }
+    if (!totalAmount) return redirect('/not-product');
 
     return (
         <Container className="mt-10">
