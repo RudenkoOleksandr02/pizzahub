@@ -18,12 +18,10 @@ export const SearchInput: React.FC<Props> = ({className}) => {
     const [products, setProducts] = React.useState<Product[]>([]);
     const ref = React.useRef(null);
 
-    // дейсвие после клика за пределами ref
     useClickAway(ref, () => {
         setFocused(false);
     });
 
-    // каждые 200 милисек проверяет изменения searchQuery
     useDebounce(async () => {
         try {
             const products = await Api.products.search(searchQuery);
@@ -47,7 +45,7 @@ export const SearchInput: React.FC<Props> = ({className}) => {
                 <input
                     className="rounded-2xl outline-none w-full bg-gray-100 pl-11"
                     type='text'
-                    placeholder="Найти пиццу..."
+                    placeholder="Знайти піцу..."
                     onFocus={() => setFocused(true)}
                     value={searchQuery}
                     onChange={e => setSearchQuery(e.target.value)}

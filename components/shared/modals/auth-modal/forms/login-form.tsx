@@ -24,20 +24,18 @@ export const LoginForm: React.FC<Props> = ({ onClose }) => {
 
     const onSubmit = async (data: TFormLoginValues) => {
         try {
-            // Провайдер для входа логин-пароль (credentials)
             const resp = await signIn('credentials', {
-                // Прокидываю все данные и НЕ делаю redirect
                 ...data,
                 redirect: false
             })
 
-            if (!resp?.ok) throw Error(); // Если аккаунта нет, триггерю catch
+            if (!resp?.ok) throw Error();
 
-            toast.success('Вы учпешно вошли в аккаунт');
+            toast.success('Ви успішно увійшли до облікового запису');
             onClose?.();
         } catch (err) {
             console.error('Error [Login]: ', err);
-            toast.error('Не удалось войти в аккаунт')
+            toast.error('Неможливо увійти в аккаунт')
         }
     }
 
@@ -46,8 +44,8 @@ export const LoginForm: React.FC<Props> = ({ onClose }) => {
             <form className='flex flex-col gap-5' onSubmit={form.handleSubmit(onSubmit)}>
                 <div className="flex justify-between items-center">
                     <div className="mr-2">
-                        <Title text="Вход в аккаунт" size="md" className="font-bold"/>
-                        <p className="text-gray-400">Введите свою почту, чтобы войти в свой аккаунт</p>
+                        <Title text="Вхід до облікового запису" size="md" className="font-bold"/>
+                        <p className="text-gray-400">Введіть свою пошту, щоб увійти до свого облікового запису</p>
                     </div>
                     <img src="/assets/images/phone-icon.png" alt="phone-icon" width={60} height={60}/>
                 </div>
@@ -55,9 +53,8 @@ export const LoginForm: React.FC<Props> = ({ onClose }) => {
                 <FormInput name="email" label="E-Mail" required />
                 <FormInput name="password" label="Пароль" type="password" required />
 
-                {/* При отправке данных (form.formState.isSubmitting = true) */}
                 <Button loading={form.formState.isSubmitting} className="h-12 text-base" type="submit">
-                    Войти
+                    Увійти
                 </Button>
             </form>
         </FormProvider>

@@ -31,13 +31,11 @@ export const updateCartTotalAmount = async (token: string) => {
 
     return prisma.cart.update({
         where: {
-            id: userCart.id // или по токену (без разницы)
+            id: userCart.id
         },
-        // обновить общую сумму корзины
         data: {
             totalAmount
         },
-        // и вернуть всю связь
         include: {
             items: {
                 orderBy: {

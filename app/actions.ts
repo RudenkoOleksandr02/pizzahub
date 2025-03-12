@@ -17,7 +17,6 @@ export async function createOrder(data: CheckoutFormValues) {
 
         if (!cartToken) throw new Error('Cart token not found');
 
-        // Находим корзину по токену
         const userCart = await prisma.cart.findFirst({
             include: {
                 user: true,
@@ -38,7 +37,6 @@ export async function createOrder(data: CheckoutFormValues) {
         if (!userCart) throw new Error('Cart not found');
         if (userCart.totalAmount === 0) throw new Error('Cart is empty');
 
-        // Создаем заказ в базе данных
         const order = await prisma.order.create({
             data: {
                 token: cartToken,
@@ -53,7 +51,6 @@ export async function createOrder(data: CheckoutFormValues) {
             },
         });
 
-        // Очищаем корзину
         await prisma.cart.update({
             where: {id: userCart.id},
             data: {totalAmount: 0},
@@ -62,11 +59,10 @@ export async function createOrder(data: CheckoutFormValues) {
             where: {cartId: userCart.id},
         });
 
-        // Создаем платежные данные для LiqPay
         const paymentData = await createPayment({
             amount: order.totalAmount,
             orderId: order.id,
-            description: 'Оплата заказа #' + order.id,
+            description: 'Оплата замовлення #' + order.id,
         });
 
         if (!paymentData) throw new Error('Payment data not found');
@@ -80,7 +76,7 @@ export async function createOrder(data: CheckoutFormValues) {
         });
         await sendEmail(
             data.email,
-            'Next Pizza / Оплатите заказ #' + order.id,
+            'Pizza Hub / Оплата замовлення #' + order.id,
             template
         );
 
@@ -93,28 +89,21 @@ export async function createOrder(data: CheckoutFormValues) {
 
 export async function updateUserInfo(body: Prisma.UserUpdateInput) {
     try {
-        // Получаем текущую сессию пользователя
         const currentUser = await getUserSession();
 
-        // Если пользователь не авторизован, выбрасываем ошибку
-        if (!currentUser) throw new Error('Пользователь не авторизован');
+        if (!currentUser) throw new Error('Користувач не авторизований');
 
-        // Находим пользователя в базе данных по идентификатору из сессии
         const findUser = await prisma.user.findFirst({
             where: { id: Number(currentUser.id) }
         });
 
-        // Если пользователь не найден, выбрасываем ошибку
-        if (!findUser) throw new Error('Пользователь не найден');
+        if (!findUser) throw new Error('Користувач не знайдено');
 
-        // Обновляем данные пользователя в базе
         await prisma.user.update({
-            // Ищем пользователя по id, полученному из сессии
             where: { id: findUser.id },
             data: {
                 fullName: body.fullName,
                 email: body.email,
-                // Если передан новый пароль, хешируем его, иначе оставляем прежний
                 password: body.password ? hashSync(body.password as string, 10) : findUser.password
             }
         });
@@ -126,21 +115,18 @@ export async function updateUserInfo(body: Prisma.UserUpdateInput) {
 
 export async function registerUser(body: Prisma.UserCreateInput) {
     try {
-        // Проверяем, существует ли пользователь с данным email
         const user = await prisma.user.findFirst({
             where: { email: body.email },
         });
 
         if (user) {
-            // Если пользователь найден, но почта не подтверждена - выбрасываем ошибку
             if (!user.verified) {
-                throw new Error('Почта не подтверждена');
+                throw new Error('Пошта не підтверджена');
             }
-            // Если пользователь уже существует, выбрасываем ошибку
-            throw new Error('Пользователь уже существует');
+
+            throw new Error('Користувач вже існує');
         }
 
-        // Создаем нового пользователя с хешированным паролем
         const createdUser = await prisma.user.create({
             data: {
                 fullName: body.fullName,
@@ -149,9 +135,8 @@ export async function registerUser(body: Prisma.UserCreateInput) {
             },
         });
 
-        // Генерируем 6-значный код верификации
         const code = Math.floor(100000 + Math.random() * 900000).toString();
-        // Сохраняем код верификации в базе, связываем с созданным пользователем
+
         await prisma.verificationCode.create({
             data: {
                 code,
@@ -159,12 +144,10 @@ export async function registerUser(body: Prisma.UserCreateInput) {
             },
         });
 
-        // Формируем шаблон письма с кодом верификации
         const template = await VerificationUser({ code });
-        // Отправляем письмо для подтверждения регистрации
         await sendEmail(
             createdUser.email,
-            'Next Pizza / 📝 Подтверждение регистрации',
+            'Pizza Hub / 📝 Підтвердження реєстрації',
             template
         );
     } catch (err) {

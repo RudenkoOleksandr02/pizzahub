@@ -25,7 +25,7 @@ export const InfoBlock: React.FC<Props> = ({ className, title, text, imageUrl })
           <Link href="/">
             <Button variant="outline" className="gap-2">
               <ArrowLeft />
-              На главную
+              На головну
             </Button>
           </Link>
           <a href="">

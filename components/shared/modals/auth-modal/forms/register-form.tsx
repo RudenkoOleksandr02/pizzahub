@@ -32,14 +32,14 @@ export const RegisterForm: React.FC<Props> = ({onClose}) => {
                 password: data.password
             });
 
-            toast.error('Регистрация успешна 📝. Подтвердите свою почту', {
+            toast.error('Реєстрація успішна. Підтвердьте свою пошту', {
                 icon: '✅',
             });
 
             onClose?.();
         } catch (error) {
             console.error(error);
-            return toast.error('Неверный E-Mail или пароль', {
+            return toast.error('Неправильний E-Mail або пароль', {
                 icon: '❌',
             });
         }
@@ -50,12 +50,12 @@ export const RegisterForm: React.FC<Props> = ({onClose}) => {
         <FormProvider {...form}>
             <form className="flex flex-col gap-5" onSubmit={form.handleSubmit(onSubmit)}>
                 <FormInput name="email" label="E-Mail" required />
-                <FormInput name="fullName" label="Полное имя" required />
+                <FormInput name="fullName" label="Повне ім'я" required />
                 <FormInput name="password" label="Пароль" type="password" required />
-                <FormInput name="confirmPassword" label="Подтвердите пароль" type="password" required />
+                <FormInput name="confirmPassword" label="Підтвердьте пароль" type="password" required />
 
                 <Button loading={form.formState.isSubmitting} className="h-12 text-base" type="submit">
-                    Зарегистрироваться
+                    Зареєструватись
                 </Button>
             </form>
         </FormProvider>

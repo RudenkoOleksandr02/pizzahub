@@ -23,7 +23,7 @@ export const AuthModal: React.FC<Props> = ({ onClose, open }) => {
 
     return (
         <Dialog open={open} onOpenChange={handleClose}>
-            <VisuallyHidden><DialogTitle>Авторизация</DialogTitle></VisuallyHidden>
+            <VisuallyHidden><DialogTitle>Авторизація</DialogTitle></VisuallyHidden>
             <DialogContent className="w-[450px] bg-white p-10">
                 {type === 'login' ? (
                     <LoginForm onClose={handleClose} />
@@ -38,9 +38,7 @@ export const AuthModal: React.FC<Props> = ({ onClose, open }) => {
                     <Button
                         variant="secondary"
                         onClick={() =>
-                            // Провайдер github
                             signIn('github', {
-                                // После успеха redirect на главную страницу
                                 callbackUrl: '/',
                                 redirect: true,
                             })
@@ -59,9 +57,7 @@ export const AuthModal: React.FC<Props> = ({ onClose, open }) => {
                     <Button
                         variant="secondary"
                         onClick={() =>
-                            // Провайдер google
                             signIn('google', {
-                                // После успеха redirect на главную страницу
                                 callbackUrl: '/',
                                 redirect: true,
                             })
@@ -77,7 +73,7 @@ export const AuthModal: React.FC<Props> = ({ onClose, open }) => {
                     </Button>
                 </div>
                 <Button variant="outline" onClick={onSwitchType} type="button" className="h-12">
-                    {type !== 'login' ? 'Войти' : 'Регистрация'}
+                    {type !== 'login' ? 'Увійти' : 'Реєстрація'}
                 </Button>
             </DialogContent>
         </Dialog>

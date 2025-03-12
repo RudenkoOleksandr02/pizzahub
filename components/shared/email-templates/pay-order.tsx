@@ -12,10 +12,10 @@ export const PayOrder: React.FC<Readonly<Props>> = ({
                                                                           paymentUrl
                                                                       }) => (
     <div>
-        <h1>Заказ №{orderId}</h1>
+        <h1>Замовлення №{orderId}</h1>
         <p>
-            Оплатите заказ на сумму {totalAmount} ₴. Перейдите <a href={paymentUrl}>по этой ссылке</a> для оплаты
-            заказа.
+            Оплатіть замовлення на суму {totalAmount} ₴. Перейдіть <a href={paymentUrl}>за цим посиланням</a> для оплати
+            замовлення.
         </p>
     </div>
 );

@@ -14,18 +14,17 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement>{
 
 export const FormInput: React.FC<Props> = ({className, name, label, required, ...props}) => {
     const {
-        register, // Регистрация поля в useForm
-        formState: {errors}, // Получение ошибок валидации
-        watch, // Отслеживание изменений значения поля
-        setValue // Установка нового значения поля (в моем случае используется только для очистки поля)
+        register,
+        formState: {errors},
+        watch,
+        setValue
     } = useFormContext();
 
-    // Следит за изменнениями
-    const value = watch(name); // Текущее значение поля
-    const errorText = errors[name]?.message as string; // Текст ошибки, если есть
+    const value = watch(name);
+    const errorText = errors[name]?.message as string;
 
     const onClickClear = () => {
-        setValue(name, '', {shouldValidate: true}); // Очистка поля (shouldValidate: true - валидация триггерится при очистке поля)
+        setValue(name, '', {shouldValidate: true});
     }
 
     return (
@@ -37,14 +36,11 @@ export const FormInput: React.FC<Props> = ({className, name, label, required, ..
             )}
 
             <div className="relative">
-                {/* Регистрация поля по name */}
                 <Input className="h-12 text-md" {...props} {...register(name)} />
 
-                {/* Кнопка очистки, если есть значение */}
                 {value && <ClearButton onClick={onClickClear}/>}
             </div>
 
-            {/* Отображение ошибки, если есть */}
             {errorText && <ErrorText text={errorText} className="mt-2"/>}
         </div>
     );

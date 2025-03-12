@@ -1,12 +1,8 @@
-// тут функции будут вызываться по запросу /api/users
-
 import {NextRequest, NextResponse} from "next/server";
 import {prisma} from "@/prisma/prisma-client";
 
 export async function GET() {
-    // получить всех юзеров из prisma
     const users = await prisma.user.findMany();
-    // вернуть юзеров в формате json
     return NextResponse.json(users)
 }
 

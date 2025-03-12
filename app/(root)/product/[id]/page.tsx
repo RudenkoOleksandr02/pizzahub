@@ -5,10 +5,8 @@ import {Container, ProductForm} from "@/components/shared";
 export default async function ProductPage({params}: { params: Promise<{ id: string }> }) {
     const {id} = await params;
 
-    // Дай первый продукт где id равен условию
     const product = await prisma.product.findFirst({
         where: {id: Number(id)},
-        // для рекомендаций
         include: {
             category: {
                 include: {
@@ -24,7 +22,6 @@ export default async function ProductPage({params}: { params: Promise<{ id: stri
         }
     });
 
-    // Компонент "404"
     if (!product) notFound();
 
     return <Container className="flex flex-col my-10">

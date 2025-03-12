@@ -10,22 +10,19 @@ interface Props {
 
 export const CheckoutAddressForm: React.FC<Props> = ({ className }) => {
     const {control} = useFormContext();
-    // Этот подход применяется, когда нужно интегрировать неуправляемые компоненты
-    // (например, компоненты сторонних библиотек, таких как dadata для автозаполнения адреса)
-    // с управляемыми формами в библиотеке react-hook-form.
 
     return (
-        <WhiteBlock title="3. Адрес доставки" className={className}>
+        <WhiteBlock title="3. Адреса доставки" className={className}>
             <div className="flex flex-col gap-5">
                 <Controller
-                    control={control} // Передаю control из useFormContext, чтобы интегрировать компонент с формой
-                    name='address' // Указыю имя поля формы для адреса
+                    control={control}
+                    name='address'
                     render={({ field, fieldState }) => <>
-                        <AddressInput onSelect={field.onChange}/> {/* Подключаю AddressInput и передаю onChange для обновления значения поля */}
-                        {fieldState.error?.message && <ErrorText text={fieldState.error.message}/>} {/* Показываю ошибку, если она есть */}
+                        <AddressInput onSelect={field.onChange}/>
+                        {fieldState.error?.message && <ErrorText text={fieldState.error.message}/>}
                     </>}
                 />
-                <FormTextarea name="comment" rows={5} className="text-base" placeholder="Комментарии к заказу"/>
+                <FormTextarea name="comment" rows={5} className="text-base" placeholder="Коментарі до замовлення"/>
             </div>
         </WhiteBlock>
     );

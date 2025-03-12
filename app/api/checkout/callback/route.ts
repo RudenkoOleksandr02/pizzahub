@@ -16,7 +16,6 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ message: 'Invalid request' }, { status: 400 });
         }
 
-        // Проверяем подпись, чтобы убедиться, что данные пришли от LiqPay
         const signStr = crypto
             .createHash('sha1')
             .update(process.env.LIQPAY_PRIVATE_KEY + data + process.env.LIQPAY_PRIVATE_KEY)
@@ -61,7 +60,7 @@ export async function POST(req: NextRequest) {
         if (status === 'success') {
             await sendEmail(
                 order.email,
-                'Next Pizza | Ваш заказ успешно оформлен',
+                'Pizza Hub | Ваше замовлення успішно оформлено',
                 template
             )
         }

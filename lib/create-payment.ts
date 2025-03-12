@@ -7,7 +7,6 @@ interface Props {
 }
 
 export async function createPayment(details: Props): Promise<{paymentUrl: string}> {
-    // Формируем объект параметров для LiqPay
     const params = {
         public_key: process.env.LIQPAY_PUBLIC_KEY,
         version: '3',
@@ -19,11 +18,9 @@ export async function createPayment(details: Props): Promise<{paymentUrl: string
         result_url: process.env.LIQPAY_RESULT_URL
     };
 
-    // Преобразуем объект параметров в JSON и затем в base64
     const jsonString = JSON.stringify(params);
     const data = Buffer.from(jsonString).toString('base64');
 
-    // Генерируем подпись
     const signatureString = process.env.LIQPAY_PRIVATE_KEY + data + process.env.LIQPAY_PRIVATE_KEY;
     const signature = crypto
         .createHash('sha1')

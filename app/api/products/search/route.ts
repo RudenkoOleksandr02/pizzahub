@@ -8,24 +8,11 @@ export async function GET(req: NextRequest) {
         where: {
             name: {
                 contains: query,
-                mode: 'insensitive' // нет чувствительности к регистру
+                mode: 'insensitive'
             }
         },
-        take: 5 // вернет до 5 продуктов
+        take: 5
     })
 
     return NextResponse.json(products);
-
-    // Строгое сравнение ===
-    /*where: {
-        name: query
-    }*/
-
-    // includes JS
-    /*where: {
-        name: {
-            contains: query,
-            mode: 'insensitive'
-        }
-    }*/
 }

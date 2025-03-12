@@ -1,14 +1,12 @@
 import {z} from 'zod';
 
-// Определение схемы валидации для формы оформления заказа
 export const checkoutFormSchema = z.object({
-    firstName: z.string().min(2, {message: 'Имя должно соделжать не менее 2-х символов'}),
-    lastName: z.string().min(2, {message: 'Фамилия должна соделжать не менее 2-х символов'}),
-    email: z.string().email({message: 'Введите корректную почту'}),
-    phone: z.string().min(10, {message: 'Введите корректный номер телефона'}),
-    address: z.string().min(5, {message: 'Введите корректный адрес'}),
-    comment: z.string().optional() // Поле не является обязательным
+    firstName: z.string().min(2, {message: 'Ім\'я повинне містити не менше 2-х символів'}),
+    lastName: z.string().min(2, {message: 'Прізвище має робити не менше 2-х символів'}),
+    email: z.string().email({message: 'Введіть коректну пошту'}),
+    phone: z.string().min(10, {message: 'Введіть номер телефону'}),
+    address: z.string().min(5, {message: 'Введіть правильну адресу'}),
+    comment: z.string().optional()
 });
 
-// Генерация типа на основе схемы
 export type CheckoutFormValues = z.infer<typeof checkoutFormSchema>

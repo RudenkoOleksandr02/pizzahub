@@ -27,10 +27,10 @@ export const ProductForm: React.FC<Props> = ({product, onSubmit: _onSubmit}) => 
                 ingredientsIds
             })
 
-            toast.success('Товар добавлен в корзину');
+            toast.success('Товар доданий до кошика');
             _onSubmit?.();
         } catch (error) {
-            toast.error('Не удалось добавить товар в корзину');
+            toast.error('Неможливо додати товар до кошика');
             console.error(error);
         }
     }

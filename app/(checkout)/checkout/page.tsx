@@ -23,10 +23,9 @@ export default function CheckoutPage() {
     const [submitting, setSubmitting] = React.useState(false);
     const {data: session} = useSession();
 
-    // Инициализация useForm с валидацией через Zod и начальными значениями
     const form = useForm<CheckoutFormValues>({
-        resolver: zodResolver(checkoutFormSchema), // Использование схемы валидации
-        defaultValues: { // Начальные значения полей формы
+        resolver: zodResolver(checkoutFormSchema),
+        defaultValues: {
             email: '',
             firstName: '',
             lastName: '',
@@ -55,16 +54,14 @@ export default function CheckoutPage() {
         try {
             setSubmitting(true);
 
-            // Отправляем данные на сервер для создания заказа и получаем URL для оплаты
             const url = await createOrder(data);
-            toast.success('Переход на оплату...');
+            toast.success('Перехід на оплату...');
 
-            // Проверяем, что сервер вернул ссылку, и перенаправляем пользователя на страницу оплаты
             if (url) location.href = url;
         } catch (error) {
             console.error(error);
             setSubmitting(false);
-            toast.error('Не удалось создать заказ');
+            toast.error('Не вдалося створити замовлення');
         }
     }
 
@@ -75,14 +72,11 @@ export default function CheckoutPage() {
 
     return (
         <Container className="mt-10">
-            <Title text="Оформление заказа" className="font-extrabold mb-8 text-[36px]"/>
+            <Title text="Оформлення замовлення" className="font-extrabold mb-8 text-[36px]"/>
 
-            {/* Провайдер формы для передачи контекста useForm в дочерние компоненты */}
             <FormProvider {...form}>
-                {/* Форма с валидацией: если успешно, вызывается onSubmit */}
                 <form onSubmit={form.handleSubmit(onSubmit)}>
                     <div className="flex gap-10">
-                        {/* Левая часть */}
                         <div className="flex flex-col gap-10 flex-1 mb-20">
                             <CheckoutCart items={items} removeCartItem={removeCartItem}
                                           onClickCountButton={onClickCountButton} loading={loading}/>
@@ -90,7 +84,6 @@ export default function CheckoutPage() {
                             <CheckoutAddressForm className={loading ? "opacity-50 pointer-events-none" : ""}/>
                         </div>
 
-                        {/* Правая часть */}
                         <div className="w-[450px]">
                             <CheckoutSidebar totalAmount={totalAmount} loading={loading || submitting}/>
                         </div>

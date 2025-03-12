@@ -3,7 +3,7 @@ import {Header} from "@/components/shared/header";
 import {Suspense} from "react";
 
 export const metadata: Metadata = {
-    title: "Next Pizza | Главная"
+    title: "Pizza Hub | Головна"
 };
 
 export default function RootLayout(
@@ -13,7 +13,6 @@ export default function RootLayout(
     }>) {
     return (
         <main className="min-h-screen">
-            {/* если есть в компоненте useSearchParams(), компонент нужно обернуть в Suspense*/}
             <Suspense>
                 <Header/>
             </Suspense>

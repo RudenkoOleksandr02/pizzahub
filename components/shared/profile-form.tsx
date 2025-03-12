@@ -35,32 +35,30 @@ export const ProfileForm: React.FC<Props> = ({ data }) => {
             })
         } catch (err) {
             console.log(err);
-            toast.error('Ошибка при обновлении данных')
+            toast.error('Помилка під час оновлення даних')
         }
     };
 
     const onClickSignOut = () => {
-        // Очищает куки аккаунта
         signOut({
-            // после успешного выхода редирекет на главную
             callbackUrl: '/'
         });
     }
 
     return (
         <Container className="my-10">
-            <Title text="Личные данные" size="md" className="font-bold" />
+            <Title text="Особисті дані" size="md" className="font-bold" />
 
             <FormProvider {...form}>
                 <form className="flex flex-col gap-5 w-96 mt-10" onSubmit={form.handleSubmit(onSubmit)}>
                     <FormInput name="email" label="E-Mail" required />
-                    <FormInput name="fullName" label="Полное имя" required />
+                    <FormInput name="fullName" label="Повне ім'я" required />
 
-                    <FormInput type="password" name="password" label="Новый пароль" required />
-                    <FormInput type="password" name="confirmPassword" label="Повторите пароль" required />
+                    <FormInput type="password" name="password" label="Новий пароль" required />
+                    <FormInput type="password" name="confirmPassword" label="Повторіть пароль" required />
 
                     <Button disabled={form.formState.isSubmitting} className="text-base mt-10" type="submit">
-                        Сохранить
+                        Зберегти
                     </Button>
 
                     <Button
@@ -69,7 +67,7 @@ export const ProfileForm: React.FC<Props> = ({ data }) => {
                         disabled={form.formState.isSubmitting}
                         className="text-base"
                         type="button">
-                        Выйти
+                        Вийти
                     </Button>
                 </form>
             </FormProvider>
