@@ -24,7 +24,7 @@ export const Header: React.FC<Props> = ({className, hasSearch = true, hasCart = 
         const isVerified = searchParams.has('verified');
 
         if (isPaid) toast.success('Замовлення успішно сплачено! Інформація надіслана на пошту.');
-        if (isVerified) toast.success('Пошта успішно підтверджена!');
+        if (isVerified) toast.success('Пошта успішно підтверджена! Тепер ви можете увійти до свого облікового запису.');
 
         if (isVerified || isPaid) {
             setTimeout(() => {

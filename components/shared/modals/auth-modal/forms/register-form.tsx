@@ -39,7 +39,7 @@ export const RegisterForm: React.FC<Props> = ({onClose}) => {
             onClose?.();
         } catch (error) {
             console.error(error);
-            return toast.error('Неправильний E-Mail або пароль', {
+            return toast.error('Користувач із вказаною електронною поштою вже зареєстрований.', {
                 icon: '❌',
             });
         }
