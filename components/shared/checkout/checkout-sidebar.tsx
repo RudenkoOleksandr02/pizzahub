@@ -2,14 +2,13 @@ import React from 'react';
 import {CheckoutItemDetails, WhiteBlock} from "@/components/shared";
 import {ArrowRight, Package, Truck} from "lucide-react";
 import {Button, Skeleton} from "@/components/ui";
+import {DELIVERY_PRICE} from "@/constants";
 
 interface Props {
     totalAmount: number;
     loading?: boolean;
     className?: string;
 }
-
-const DELIVERY_PRICE = 70;
 
 export const CheckoutSidebar: React.FC<Props> = ({totalAmount, loading}) => {
     const totalPrice = totalAmount + DELIVERY_PRICE;

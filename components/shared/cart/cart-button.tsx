@@ -4,7 +4,7 @@ import React from 'react';
 import {ArrowRight, ShoppingCart} from "lucide-react";
 import {Button} from "@/components/ui";
 import {cn} from "@/lib/utils";
-import {CartDrawer} from "@/components/shared/cart-drawer";
+import {CartDrawer} from "@/components/shared/cart/cart-drawer";
 import {useCartStore} from "@/store";
 
 interface Props {

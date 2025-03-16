@@ -54,7 +54,6 @@ export default function CheckoutPage() {
     const onSubmit = async (data: CheckoutFormValues) => {
         try {
             setSubmitting(true);
-
             const url = await createOrder(data);
             toast.success('Перехід на оплату...');
 
@@ -70,7 +69,8 @@ export default function CheckoutPage() {
         const newQuantity = type === 'plus' ? quantity + 1 : quantity - 1;
         updateItemQuantity(id, newQuantity)
     }
-    if (!totalAmount) return redirect('/not-product');
+
+    if (!totalAmount && !loading) return redirect('/not-product');
 
     return (
         <Container className="mt-10">

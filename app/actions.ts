@@ -1,6 +1,6 @@
 "use server";
 
-import {CheckoutFormValues} from "@/constants";
+import {CheckoutFormValues, DELIVERY_PRICE} from "@/constants";
 import {prisma} from "@/prisma/prisma-client";
 import {OrderStatus, Prisma} from "@prisma/client";
 import {cookies} from "next/headers";
@@ -60,7 +60,7 @@ export async function createOrder(data: CheckoutFormValues) {
         });
 
         const paymentData = await createPayment({
-            amount: order.totalAmount,
+            amount: order.totalAmount + DELIVERY_PRICE,
             orderId: order.id,
             description: 'Оплата замовлення #' + order.id,
         });
@@ -71,7 +71,7 @@ export async function createOrder(data: CheckoutFormValues) {
 
         const template = await PayOrder({
             orderId: order.id,
-            totalAmount: order.totalAmount,
+            totalAmount: order.totalAmount + DELIVERY_PRICE,
             paymentUrl,
         });
         await sendEmail(

@@ -1,7 +1,7 @@
 import React from 'react';
 import {cn} from "@/lib/utils";
 import * as CartItem from './cart-item-details';
-import {CartItemProps} from "@/components/shared/cart-item-details/cart-item-details.types";
+import {CartItemProps} from "@/components/shared/cart/cart-item-details/cart-item-details.types";
 import {Trash2Icon} from "lucide-react";
 
 interface Props extends CartItemProps {

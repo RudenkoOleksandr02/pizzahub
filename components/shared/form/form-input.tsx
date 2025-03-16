@@ -5,7 +5,7 @@ import {ClearButton, ErrorText, RequiredSymbol} from "@/components/shared";
 import { Input } from '@/components/ui';
 import {useFormContext} from "react-hook-form";
 
-interface Props extends React.InputHTMLAttributes<HTMLInputElement>{
+interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
     name: string;
     label?: string;
     required?: boolean;

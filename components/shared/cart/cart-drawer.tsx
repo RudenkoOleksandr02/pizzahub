@@ -13,7 +13,7 @@ import {
 } from "@/components/ui";
 import Link from "next/link";
 import {ArrowLeft, ArrowRight} from "lucide-react";
-import {CartDrawerItem} from "@/components/shared/cart-drawer-item";
+import {CartDrawerItem} from "@/components/shared/cart/cart-drawer-item";
 import {getCartItemDetails} from "@/lib";
 import {PizzaSize, PizzaType} from "@/constants/pizza";
 import {Title} from "@/components/shared"

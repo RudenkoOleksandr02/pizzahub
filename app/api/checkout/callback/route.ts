@@ -25,7 +25,6 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ message: 'Invalid signature' }, { status: 400 });
         }
 
-        // Декодируем `data` из base64 в JSON
         const decodedData = JSON.parse(Buffer.from(data, 'base64').toString('utf8'));
 
         const paymentId = decodedData.payment_id;
