@@ -43,17 +43,16 @@ export const Stories: React.FC<Props> = ({ className }) => {
                     <div key={index} className="w-[200px] h-[200px] bg-gray-200 rounded-md animate-pulse" />
                 ))
             }
-
             {stories.map((story) => (
+                <div className="flex-1">
                 <img
                     key={story.id}
                     onClick={() => onClickStory(story)}
-                    className="rounded-md cursor-pointer"
-                    height={250}
-                    width={200}
+                    className="rounded-md cursor-pointer object-cover"
                     src={story.previewImageUrl}
                     alt={`story ` + story.id}
                 />
+                </div>
             ))}
 
             {open && (

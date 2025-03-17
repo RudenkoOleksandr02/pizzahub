@@ -1,7 +1,6 @@
 import React from 'react';
 import Link from "next/link";
 import {Title} from "./index";
-import {Plus} from "lucide-react";
 import {Button} from '../ui';
 import {Ingredient} from "@prisma/client";
 import {cn} from "@/lib/utils";
@@ -20,8 +19,8 @@ export const ProductCard: React.FC<Props> = ({name, price, id, imageUrl, ingredi
         <div className={cn('flex flex-col justify-between', className)}>
             <div>
                 <Link href={`/product/${id}`} scroll={false}>
-                    <div className="flex justify-center p-6 bg-secondary rounded-lg h-[260px]">
-                        <img className="w-[215px] h-[215px]" src={imageUrl} alt={name}/>
+                    <div className="flex justify-center items-center p-6 bg-secondary rounded-lg h-[260px]">
+                        <img className="h-fit" src={imageUrl} alt={name}/>
                     </div>
                 </Link>
 
