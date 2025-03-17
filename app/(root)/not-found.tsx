@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import {InfoBlock} from "@/components/shared";
 
 export default function NotFound() {
