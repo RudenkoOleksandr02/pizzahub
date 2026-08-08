@@ -1,72 +1,36 @@
-# PizzaHub — демонстраційний вебзастосунок замовлення піци
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-PizzaHub («Pizza Hub — неймовірна насолода») — демонстраційний вебзастосунок для замовлення піци, побудований на основі **Next.js** та **Prisma**. Проєкт демонструє роботу з сучасними технологіями: реалізовано реєстрацію й авторизацію користувачів (за допомогою **NextAuth.js**), перегляд каталогу товарів із фільтрами (тип тіста, розмір, інгредієнти, діапазон цін), динамічний кошик та оформлення замовлення з інтеграцією онлайн-оплати. Інтерфейс стилізовано з використанням **Tailwind CSS** і компонентів **ShadCN**.
+## Getting Started
 
-## Особливості
+First, run the development server:
 
-* **Авторизація та реєстрація** користувачів (NextAuth.js, email-провайдер).
-* **Каталог товарів** (піца, сніданки, закуски, коктейлі, напої) з фільтрами за типом тіста, розміром, ціною та складниками.
-* **Кошик** для вибору товарів з динамічним підрахунком вартості.
-* **Оформлення замовлення** з інтегрованою платіжною системою для прийому онлайн-платежів.
-* **Відправлення повідомлень на email** (підтвердження замовлення, відновлення паролю) через сервіс Resend.
-* **Валідація форм** за допомогою React Hook Form і Zod.
-* **Повідомлення користувачу** через тост-нотифікації (`react-hot-toast`).
-* **Управління станом** застосунку з `zustand` (для зберігання вибраних товарів тощо).
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-## Основні технології:
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-* **Next.js**
-* **React** і **TypeScript**
-* **Prisma**
-* **NextAuth.js**
-* **Tailwind CSS**
-* **ShadCN**
-* **React Hook Form**
-* **Zod**
-* **React Hot Toast**
-* **Resend**
-* **Lucide React**
-* **Zustand**
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-## Встановлення та запуск
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-1. Клонувати репозиторій:
+## Learn More
 
-   ```bash
-   git clone https://github.com/RudenkoOleksandr02/pizzahub.git
-   cd pizzahub
-   ```
-2. Встановити залежності:
+To learn more about Next.js, take a look at the following resources:
 
-   ```bash
-   npm install
-   ```
-3. Створити файл `.env` у корені проекту та вказати необхідні змінні середовища:
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-   ```bash
-   DATABASE_URL=
-   NEXT_PUBLIC_API_URL=
-   RESEND_API_KEY=
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-   LIQPAY_PUBLIC_KEY=
-   LIQPAY_PRIVATE_KEY=
-   LIQPAY_RESULT_URL=
+## Deploy on Vercel
 
-   GITHUB_ID=
-   GITHUB_SECRET=
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-   NEXTAUTH_SECRET=
-
-   GOOGLE_CLIENT_ID=
-   GOOGLE_CLIENT_SECRET=
-   ```
-5. Запустити сервер розробки:
-
-   ```bash
-   npm run dev
-   ```
-6. Відкрити [http://localhost:3000](http://localhost:3000) у браузері.
-
-## Демо
-
-Демо-версія проекту доступна за адресою: [pihhahub.online](https://pihhahub.online). Там можна ознайомитися з усім функціоналом: переглядом меню, додаванням у кошик, оформленням замовлення, реєстрація тощо.
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
