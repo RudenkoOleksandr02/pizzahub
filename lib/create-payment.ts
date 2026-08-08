@@ -26,7 +26,6 @@ export async function createPayment(details: Props): Promise<{paymentUrl: string
         .createHash('sha1')
         .update(signatureString)
         .digest('base64');
-
     return {
         paymentUrl: `https://www.liqpay.ua/api/3/checkout?data=${data}&signature=${signature}`,
     }
